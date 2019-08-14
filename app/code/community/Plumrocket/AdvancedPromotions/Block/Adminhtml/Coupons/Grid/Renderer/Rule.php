@@ -22,6 +22,6 @@ class Plumrocket_Advancedpromotions_Block_Adminhtml_Coupons_Grid_Renderer_Rule
     {
         $href = Mage::helper('adminhtml')->getUrl('adminhtml/promo_quote/edit', array('id' => $row->getRuleId()));
 
-        return '<a href="' . $href . '" target="_blank">' . $row->getName() . '</a>';
+        return '<a href="' . $href . '" target="_blank">' . $row->getRuleName() . '</a>';
     }
 }

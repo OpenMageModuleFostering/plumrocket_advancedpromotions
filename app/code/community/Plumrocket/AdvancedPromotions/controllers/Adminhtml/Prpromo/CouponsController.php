@@ -19,11 +19,33 @@ class Plumrocket_AdvancedPromotions_Adminhtml_Prpromo_CouponsController extends 
 {
     public function indexAction()
     {
+        if (!Mage::getStoreConfig(Plumrocket_AdvancedPromotions_Helper_Data::RUNTIME_CONFIG_KEY)) {
+            Mage::getSingleton('pradvancedpromotions/index')->reindex();
+        }
+
+        Mage::getSingleton('adminhtml/session')->addNotice(
+            Mage::helper('core')->__('Last updated: %s. To refresh last Orders & Coupons data, click <a href="%s">here</a>.',
+                date('M d, Y g:i:s A', Mage::getStoreConfig(Plumrocket_AdvancedPromotions_Helper_Data::RUNTIME_CONFIG_KEY)),
+                Mage::helper('adminhtml')->getUrl('*/*/refresh')
+            )
+        );
         $this->loadLayout()
             ->_setActiveMenu('promo')
             ->_title($this->__('Orders &amp; Coupons'));
 
         $this->renderLayout();
+    }
+
+    public function refreshAction()
+    {
+        try {
+            Mage::getSingleton('pradvancedpromotions/index')->reindex();
+            Mage::getSingleton('adminhtml/session')->addSuccess('Data refreshed successfully.');
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError('Cannot refresh data. '. $e->getMessage());
+        }
+
+        $this->_redirectReferer();
     }
 
     protected function _isAllowed()

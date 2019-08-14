@@ -15,16 +15,10 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
-class Plumrocket_AdvancedPromotions_Model_Resource_Grid_Collection extends Mage_SalesRule_Model_Resource_Rule_Collection
+class Plumrocket_AdvancedPromotions_Model_Cron
 {
-	public static $itemInc = 0;
-
-	public function addItem(Varien_Object $item)
-    {
-    	self::$itemInc++;
-    	$item->setIdFieldName('fake_id');
-    	$item->setId(self::$itemInc);
-
-    	return parent::addItem($item);
-    }
+	public function reindex()
+	{
+        Mage::getSingleton('pradvancedpromotions/index')->reindex();
+	}
 }

@@ -20,20 +20,40 @@
     <modules>
         <Plumrocket_AdvancedPromotions>
             <wiki>http://wiki.plumrocket.com/wiki/Advanced_Promotions_v1.x</wiki>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </Plumrocket_AdvancedPromotions>
     </modules>
     <global>
-        <models>
-            <pradvancedpromotions>
-                <class>Plumrocket_AdvancedPromotions_Model</class>
-            </pradvancedpromotions>
-        </models>
         <helpers>
             <pradvancedpromotions>
                 <class>Plumrocket_AdvancedPromotions_Helper</class>
             </pradvancedpromotions>
         </helpers>
+        <models>
+            <pradvancedpromotions>
+                <class>Plumrocket_AdvancedPromotions_Model</class>
+                <resourceModel>pradvancedpromotions_mysql4</resourceModel>
+            </pradvancedpromotions>
+            <pradvancedpromotions_mysql4>
+                <class>Plumrocket_AdvancedPromotions_Model_Mysql4</class>
+                <entities>
+                    <index>
+                        <table>pradvancedpromotions_index</table>
+                    </index>
+                </entities>
+            </pradvancedpromotions_mysql4>
+        </models>
+
+        <resources>
+            <pradvancedpromotions_setup>
+                <setup>
+                    <module>Plumrocket_AdvancedPromotions</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </pradvancedpromotions_setup>
+        </resources>
         <blocks>
             <pradvancedpromotions>
                 <class>Plumrocket_AdvancedPromotions_Block</class>
@@ -94,4 +114,16 @@
             </adminhtml>
         </routers>
     </admin>
+    <crontab>
+        <jobs>
+            <pradvancedpromotions_reindex>
+                <schedule>
+                    <cron_expr>15 6 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>pradvancedpromotions/cron::reindex</model>
+                </run>
+            </pradvancedpromotions_reindex>
+        </jobs>
+    </crontab>
 </config>

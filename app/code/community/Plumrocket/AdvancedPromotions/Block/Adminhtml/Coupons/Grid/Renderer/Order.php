@@ -20,10 +20,10 @@ class Plumrocket_Advancedpromotions_Block_Adminhtml_Coupons_Grid_Renderer_Order
 {
     public function render(Varien_Object $row)
     {
-        $href = Mage::helper('adminhtml')->getUrl('adminhtml/sales_order/view', array('order_id' => $row->getEntityId()));
+        $href = Mage::helper('adminhtml')->getUrl('adminhtml/sales_order/view', array('order_id' => $row->getOrderId()));
 
-        if ($row->getIncrementId()) {
-        	return '<a href="' . $href . '" target="_blank">' . $row->getIncrementId() . '</a>';
+        if ($row->getOrderIncrementId()) {
+        	return '<a href="' . $href . '" target="_blank">' . $row->getOrderIncrementId() . '</a>';
         }
 
         return '';

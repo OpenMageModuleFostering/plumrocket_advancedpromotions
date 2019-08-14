@@ -15,12 +15,17 @@
  * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
  */
 
-class Plumrocket_AdvancedPromotions_Helper_Data extends Plumrocket_AdvancedPromotions_Helper_Main
+class Plumrocket_AdvancedPromotions_Model_Index extends Mage_Core_Model_Abstract
 {
-	const RUNTIME_CONFIG_KEY = 'pradvancedpromotions/cron/runtime';
 
-	public function moduleEnabled($store = null)
+    public function _construct()
+    {
+        parent::_construct();
+        $this->_init('pradvancedpromotions/index');
+    }
+
+	public function reindex()
 	{
-		return true;
+        $this->_getResource()->reindex();
 	}
 }
