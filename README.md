@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Advanced Promotions Magento Extension allows to significantly speed-up Admin's work with Shopping Cart Price Rules and Catalog Price Rules by adding some very useful features.
